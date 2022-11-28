@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { AiFillEye,AiFillEyeInvisible } from 'react-icons/ai'
+import { Link} from 'react-router-dom'
 
 const Signup = () => {
     interface SignupData{
@@ -15,11 +16,16 @@ const Signup = () => {
         e.preventDefault()
       }
   return (
-    <>
+    <div className='block'>
+        <div className='flex justify-center items-center pt-4'>
+        <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
+        </div>
         <div className='flex h-screen '>
+          <div className='items-center justify-center'>            
+          </div>
         <div className=' flex w-full justify-center items-center '>
           <div className='flex justify-center items-center bg-slate-50 h-3/4 w-3/4'>
-              <div>
+              <div className='pl-12'>
                 <h1 className='text-5xl'>Sign up</h1>
                 <h3 className='mt-2 text-2xl font-thin'>And Share your ideas</h3>
               </div>
@@ -59,7 +65,7 @@ const Signup = () => {
         </div>
 
       </div>   
-    </>
+    </div>
 )
 }
 

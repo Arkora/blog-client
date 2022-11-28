@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   interface FormData{
@@ -20,11 +21,14 @@ const Login = () => {
     e.preventDefault()
   }
   return (
-    <>
+    <div>
+      <div className='flex justify-center items-center '>
+          <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
+        </div>
       <div className='flex h-screen '>
         <div className=' flex w-full justify-center items-center '>
           <div className='flex justify-center items-center bg-slate-50 h-3/4 w-3/4'>
-              <div>
+              <div >
                 <h1 className='text-5xl'>Login</h1>
                 <h3 className='mt-2 text-2xl font-thin'>And Share your ideas</h3>
               </div>
@@ -53,7 +57,7 @@ const Login = () => {
         </div>
 
       </div>
-    </>
+    </div>
   )
 }
 
