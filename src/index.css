@@ -13,7 +13,7 @@
   justify-center 
   cursor-pointer 
   hover:bg-slate-400
-  hover:text-white
+  hover:text-white;
 }
 
 .input{
@@ -51,4 +51,39 @@
   transition
   duration-150
   ease-in-out;
+}
+
+.notification-button{
+  @apply
+  bg-blue-600
+  text-white
+  font-medium
+  text-xs
+  leading-tight
+  uppercase
+  rounded
+  shadow-md
+  hover:bg-blue-700 hover:shadow-lg
+  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+  active:bg-blue-800 active:shadow-lg
+  transition
+  duration-150
+  w-8
+  h-8
+  rounded-full
+  ease-in-out;
+}
+
+.sidebar-item{
+  @apply
+  flex
+  flex-row 
+  transition 
+  ease-in-out 
+  duration-150 
+  hover:rounded-lg 
+  hover:py-1  
+  hover:px-6 
+  cursor-pointer 
+  hover:bg-slate-100;
 }

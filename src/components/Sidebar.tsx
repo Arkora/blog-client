@@ -6,31 +6,31 @@ import { Link} from 'react-router-dom'
 
 const Sidebar = () => {
   return (
-    <div className='block fixed  p-4 h-screen'>
+    <div className='block fixed pl-12 h-screen'>
         
         <div className='mt-[6rem]'>
           <ul>
             <li  className='mt-6'>
-             <Link to='/'> <div className='flex flex-row hover:rounded-lg hover:py-1  hover:px-6 cursor-pointer hover:bg-slate-100'>
+             <Link to='/'> <div className='sidebar-item'>
                 <AiFillHome size={30} />
                 <h3 className='text-xl ml-2 text-center'> Home</h3>
              </div></Link>
 
             </li>
             <li  className='mt-6'>
-             <Link to='/profile'> <div className='flex flex-row hover:rounded-lg hover:py-1 hover:px-6 cursor-pointer hover:bg-slate-100'>
+             <Link to='/profile'> <div className='sidebar-item'>
                 <RiAccountCircleFill size={30} />
                 <h3 className='text-xl ml-2 text-center'> Profile</h3>
               </div></Link>
             </li>
             <li  className='mt-6'>
-              <Link to='/newpost'><div className='flex flex-row hover:rounded-lg hover:py-1 hover:px-6 cursor-pointer hover:bg-slate-100'>
+              <Link to='/newpost'><div className='sidebar-item'>
                 <BsFileEarmarkPostFill size={30} />
                 <h3 className='text-xl ml-2 text-center'> New Post </h3>
               </div></Link>
             </li>
             <li  className='mt-6'>
-             <Link to='/settings'> <div className='flex flex-row hover:rounded-lg hover:py-1 hover:px-6 cursor-pointer hover:bg-slate-100'>
+             <Link to='/settings'> <div className='sidebar-item'>
                 <AiFillSetting size={30} />
                 <h3 className='text-xl ml-2 text-center'> Settings </h3>
               </div></Link>
