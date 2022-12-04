@@ -1,30 +1,115 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { AiFillEye,AiFillEyeInvisible } from 'react-icons/ai'
-import { Link} from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
+import { signup } from '../api'
 
 const Signup = () => {
     interface SignupData{
-        name:string;
+        firstname:string;
         lastname:string;
+        email:string;
         password:string;
         username:string;
     }
     const [showPassword, setShowPassword] = useState(false)
-    const [formData,setFormData] = useState<SignupData>({name:'',lastname:'',password:"",username:''})
+    const [formData,setFormData] = useState<SignupData>({firstname:'',lastname:'',email:'',password:"",username:''})
+    const [formErrors, setFormErrors] = useState<string|any>({})    
+    const [password,setPassword] = useState<string>('')
+    const [passwordComp,setPasswordComp] = useState(true)
+    const [isSubmit, setIsSubmit] = useState<boolean>(false)
+    const [err, setErr] = useState<string>("")
+    const [res,setRes] = useState<string>("Account created Successfully")
+    
 
-    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      if(password !== formData.password){
+        setPasswordComp(false)
+      }else{
+        setPasswordComp(true)
+      }
+    }, [password,formData.password])
+
+    const validate = (values:string|any) => {
+      const errors:string|any = {};
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+      if(!values.firstname){
+        errors.firstname = "Name is required!"
+      }
+      if(!values.lastname){
+        errors.lastname = "Last Name is required!"
+      }
+      if(!values.username){
+        errors.username = "Username is required!"
+      }
+      if (!values.email) {
+        errors.email = "Email is required!";
+      } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+      }
+      if (!values.password) {
+        errors.password = "Password is required!";
+      } else if (values.password.length < 8) {
+        errors.password = "Password must be more than 8 characters!";
+      } else if (values.password.length > 20) {
+        errors.password = "Password cannot exceed more than 20 characters!";
+      }else if(!passwordComp){
+        errors.password = "Password don't match!!";
+
+      }
+
+      return errors;   
+    };
+
+    useEffect(()=>{
+      setRes("")      
+    },[])
+
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
+        setIsSubmit(true)
+        setFormErrors(validate(formData))   
+        if(Object.entries(formErrors).length === 0 && isSubmit){
+         try {
+          const {data} = await signup(formData)
+          setRes(data.message)
+          
+          
+         } catch (error:any) {
+          setRes("")
+          setErr(error.response.data.message)
+         }
+        
+         const timer = setTimeout(()=>{                       
+            setErr("")            
+            clearTimeout(timer)
+         },5000)
+
+         
+        }
       }
   return (
     <div className='block'>
         <div className='flex justify-center items-center pt-4'>
         <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
         </div>
-        <div className='flex h-screen '>
-          <div className='items-center justify-center'>            
-          </div>
-        <div className=' flex w-full justify-center items-center '>
-          <div className='flex justify-center items-center bg-slate-50 h-3/4 w-3/4'>
+        <div className='flex h-screen '>         
+        <div className=' flex w-full justify-center items-center '>          
+          <div className='block bg-slate-100 h-5/6 w-3/4'>
+            <div className='flex justify-center mt-4'>
+              <div className={err?'bg-slate-300 p-6 h-20 w-80 rounded-lg block':'hidden'}>
+                <div className='relative'>
+                  <p className='text-red-600 font-normal text-lg'>{err}</p>
+                  <span className='absolute -top-5 -right-6 pr-3 flex items-center  cursor-pointer ins text-white' onClick={() =>setErr("")}>X</span>
+                </div>
+              </div>
+              <div className={res?'bg-slate-300 p-3 h-24 w-80 rounded-lg block':'hidden'}>                
+                  <p className='text-white text-xl  font-normal'>{res}</p>
+                  <button className='customButton mt-2' onClick={()=>navigate('/login')}>Login</button>
+              </div>
+            </div>
+            <div className='flex justify-center items-center '>
               <div className='pl-12'>
                 <h1 className='text-5xl'>Sign up</h1>
                 <h3 className='mt-2 text-2xl font-thin'>And Share your ideas</h3>
@@ -33,33 +118,42 @@ const Signup = () => {
               <form onSubmit={handleSubmit} >
                 <div className='flex '>
                     <div>
-                        <input type="text" placeholder='Name' className='input' />
+                        <input type="text" placeholder='Name' className='input' onChange={(e)=> setFormData({...formData,firstname:e.target.value})} />
+                        <p className='text-red-400'>{formErrors.firstname}</p>
                     </div>
                     <div className='ml-2'>
-                        <input type="text" placeholder='Last Name' className='input ' />                    
+                        <input type="text" placeholder='Last Name' className='input ' onChange={(e)=> setFormData({...formData,lastname:e.target.value})} />                    
+                        <p className='text-red-400'>{formErrors.lastname}</p>
                     </div>
                 </div>                
                 <div className='mt-2'>
-                    <input type="text" placeholder='Email' className='input' />
+                    <input type="email" placeholder='Email' className='input' onChange={(e)=> setFormData({...formData,email:e.target.value})}/>
+                    <p className='text-red-400'>{formErrors.email}</p>
                 </div>
                 <div className='mt-2'>
-                    <input type="text" placeholder='Username' className='input' />
+                    <input type="text" placeholder='Username' className='input' onChange={(e)=> setFormData({...formData,username:e.target.value})} />
+                    <p className='text-red-400'>{formErrors.username}</p>
                 </div>
                 <div className='flex mt-2 '>
-                    <div className=' relative'>                  
-                        <input type={showPassword? 'text' : 'password'} placeholder='Password'  className='input' />
+                  <div className='block'>
+                    <div className='relative'>                  
+                        <input type={showPassword? 'text' : 'password'} placeholder='Password'  className='input' onChange={(e)=> setFormData({...formData,password:e.target.value})} />
                         <span className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'><i onClick={() => setShowPassword(!showPassword)} >{showPassword? <AiFillEyeInvisible /> : <AiFillEye />}</i></span>                
                     </div>
-                    <div className='ml-2 relative'>                  
-                        <input type={showPassword? 'text' : 'password'} placeholder='Repeat Password'  className='input' />
-                        <span className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'><i onClick={() => setShowPassword(!showPassword)} >{showPassword? <AiFillEyeInvisible /> : <AiFillEye />}</i></span>                
+                        <p className='text-red-400'>{formErrors.password}</p>
+                  </div>
+                    <div className='block'>
+                      <div className='ml-2 relative'>                  
+                          <input type={showPassword? 'text' : 'password'} placeholder='Repeat Password'  className={passwordComp? 'input' : 'input-false'} onChange={(e)=>setPassword(e.target.value)} />
+                          <span className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'><i onClick={() => setShowPassword(!showPassword)} >{showPassword? <AiFillEyeInvisible /> : <AiFillEye />}</i></span>                
+                      </div>
                     </div>
                 </div> 
                 <div className='mt-8 flex justify-center items-center'>
-                    <button className='customButton '>Create Account</button>
-                </div>
-                
+                    <button className='customButton ' onClick={()=>handleSubmit}>Create Account</button>
+                </div>               
               </form>
+            </div>
             </div>
           </div>
         </div>
