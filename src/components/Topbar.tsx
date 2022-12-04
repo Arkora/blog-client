@@ -3,11 +3,12 @@ import {AiFillHome} from 'react-icons/ai'
 import {IoMdNotifications} from 'react-icons/io'
 import {FaPowerOff} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
-
+import { getUser } from '../localStorage'
 
 const Topbar = () => {
     const [logoutToggle, setLogoutToggle] = useState(false)
     const [notificationsToggle, setNotificationsToggle] = useState(false)
+    const user = getUser()
     
     const handleNotifications = () =>{
         setNotificationsToggle(!notificationsToggle)
@@ -24,7 +25,7 @@ const Topbar = () => {
                 <div className='flex justify-center'>
                     <div className='flex'>
                         <div className='w-14 h-14 rounded-full bg-slate-400 flex justify-center items-center'>Hello</div>
-                        <h3 className='text-xl p-3'>Holly Molly</h3>
+                        <h3 className='text-xl p-3'>{user.firstname + ' ' + user.lastname}</h3>
                     </div>
                 </div>
                 <div className='flex w-full  justify-center p-3'>
@@ -49,7 +50,7 @@ const Topbar = () => {
         </div>
         <div className={logoutToggle? 'absolute right-1 w-72 h-40 rounded-md bg-slate-400 flex justify-center items-center leading-5' : 'hidden'}>
             <div className='block'>
-                <h1 className='text-center'>Are you sure?</h1>
+                <h6 className='text-center'>Are you sure?</h6>
                 <div className='mt-2' >
                     <button className='customButton'>Yes</button>
                     <button className='customButton ml-2'>No</button>

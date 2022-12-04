@@ -1,8 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Topbar from '../components/Topbar'
 import Sidebar from '../components/Sidebar'
+import Editor from '../components/Editor'
+import parse from 'html-react-parser';
+
 
 const Newpost = () => {
+  const [data,setData] = useState<string>('')
+  const [post, setpost] = useState({title:'',body:data})
   return (
     <>
         <div  className='block  h-20 '>
@@ -13,19 +18,19 @@ const Newpost = () => {
             <div className='lg:w-80  sm:w-20 md:w-40'>
                 <Sidebar />
             </div>
-            <div className='flex-auto '>
-                <div className='h-screen mt-28'>
-                    <form >
+            <div className='flex-auto h-screen'>
+                <div className='h-screen  mt-28'>
+                    <div >
                       <div className='w-3/4'>
                         <input type="text" placeholder='Title' className='input ' />
+                      </div>                      
+                      <div className='w-3/4'>
+                        <Editor setData={setData} />
                       </div>
-                      <div className='w-3/4 mt-2 h-2/5'>
-                        <textarea  placeholder="What's on your mind?" className='input h-full ' />
-                      </div>
-                    </form>
-                </div>
-                
+                    </div>
+                </div>                
             </div>
+            
         </div>
     </>
   )
