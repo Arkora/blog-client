@@ -5,20 +5,17 @@ import parse from 'html-react-parser';
 
 
 interface Props{
-    setData: React.Dispatch<React.SetStateAction<string>>
+    setData: React.Dispatch<React.SetStateAction<string>>;
+    data: string;
+   
 }
 
-const Editor = ({setData}:Props) => {
-     const [value, setValue] = useState<string>('')
-
-     useEffect(() => {
-       setData(value)
-     }, [value])
+const Editor = ({setData,data}:Props) => {
      
    
   return (
     <div className=' mt-2 overflow'>
-       <ReactQuill theme="snow" value={value} onChange={setValue} className='h-96' /> 
+       <ReactQuill theme="snow" value={data} onChange={setData} className='h-80' /> 
     </div>
   )
 }

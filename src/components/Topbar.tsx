@@ -2,13 +2,15 @@ import React,{useState} from 'react'
 import {AiFillHome} from 'react-icons/ai'
 import {IoMdNotifications} from 'react-icons/io'
 import {FaPowerOff} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import { getUser } from '../localStorage'
 
 const Topbar = () => {
     const [logoutToggle, setLogoutToggle] = useState(false)
     const [notificationsToggle, setNotificationsToggle] = useState(false)
     const user = getUser()
+    const navigate = useNavigate()
+
     
     const handleNotifications = () =>{
         setNotificationsToggle(!notificationsToggle)
@@ -18,6 +20,13 @@ const Topbar = () => {
         setLogoutToggle(!logoutToggle)
         setNotificationsToggle(false)
     }
+
+    const logout = () =>{
+        localStorage.clear()
+        sessionStorage.clear()        
+        navigate('/login')
+    }
+    
   return (
     <div className='fixed bg-white  w-full p-4'>
         <div className='relative'>
@@ -52,8 +61,8 @@ const Topbar = () => {
             <div className='block'>
                 <h6 className='text-center'>Are you sure?</h6>
                 <div className='mt-2' >
-                    <button className='customButton'>Yes</button>
-                    <button className='customButton ml-2'>No</button>
+                    <button className='customButton' onClick={logout}>Yes</button>
+                    <button className='customButton ml-2' onClick={() =>setLogoutToggle(false)}>No</button>
                 </div>
             </div>
         </div>

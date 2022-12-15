@@ -6,6 +6,7 @@ import Newpost from './pages/Newpost';
 import Settings from './pages/Settings';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Post from './pages/Post';
 
 
 const App = () => {
@@ -16,8 +17,9 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/newpost' element={<Newpost />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:id' element={<Profile />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/post/:id' element={<Post />} />
       </Routes>
     </Router>
   )
