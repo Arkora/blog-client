@@ -7,6 +7,7 @@ import Settings from './pages/Settings';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Post from './pages/Post';
+import EditPost from './pages/EditPost';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/post/:id' element={<Post />} />
+        <Route path='/edit/post/:id'element={<EditPost />} />
       </Routes>
     </Router>
   )

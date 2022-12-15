@@ -34,7 +34,7 @@ const PostItem = ({post}:any) => {
                 </div>
                 <div className={expand?'w-24 h-15 bg-stone-800 block rounded-lg':'hidden'}>
                     <div className='flex justify-center items-center text-white p-3 '>
-                        <div className='post-actions '><BsFillPencilFill size={20} /></div>
+                       <Link to={`/edit/post/${post.id}`}><div className='post-actions '><BsFillPencilFill size={20} /></div></Link> 
                         <div className='ml-3 post-actions '><BsFillTrashFill size={20} /></div>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PostItem from "../components/PostItem";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { useParams } from "react-router-dom";
@@ -8,6 +7,7 @@ import { RiTimeFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import parse from "html-react-parser";
 import { getPostById } from "../api";
+import CommentsList from "../components/CommentsList";
 
 const Post = () => {
   const params = useParams();
@@ -62,6 +62,9 @@ const Post = () => {
               <br />
               <h3>{post.title}</h3>
               <div className="mt-14 ">{parse(post.body)}</div>
+              <div>
+                <CommentsList comments={post.comments} postId={post.id} />
+              </div>
             </div>
             : <div>Loading</div>}
           </div>

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { AiFillEye,AiFillEyeInvisible } from 'react-icons/ai'
 import { Link,useNavigate} from 'react-router-dom'
 import { signup } from '../api'
+import Alerts from '../components/Alerts'
 
 const Signup = () => {
     interface SignupData{
@@ -17,6 +18,7 @@ const Signup = () => {
     const [password,setPassword] = useState<string>('')
     const [passwordComp,setPasswordComp] = useState(true)
     const [isSubmit, setIsSubmit] = useState<boolean>(false)
+    const [alert,setAlert] = useState<any>({res:'',err:''})
     const [err, setErr] = useState<string>("")
     const [res,setRes] = useState<string>("Account created Successfully")
     
@@ -72,13 +74,11 @@ const Signup = () => {
         setFormErrors(validate(formData))   
         if(Object.entries(formErrors).length === 0 && isSubmit){
          try {
-          const {data} = await signup(formData)
-          setRes(data.message)
-          
-          
+          const {data} = await signup(formData)          
+          setAlert({...alert,res:data.message})  
          } catch (error:any) {
-          setRes("")
-          setErr(error.response.data.message)
+          setAlert({...alert,res:''})
+          setAlert({...alert,err:error.response.data.message})          
          }
         
          const timer = setTimeout(()=>{                       
@@ -96,17 +96,13 @@ const Signup = () => {
         </div>
         <div className='flex h-screen '>         
         <div className=' flex w-full justify-center items-center '>          
-          <div className='block bg-slate-100 h-5/6 w-3/4'>
+          <div className='block bg-slate-100 h-5/6 w-3/4'>            
             <div className='flex justify-center mt-4'>
-              <div className={err?'bg-slate-300 p-6 h-20 w-80 rounded-lg block':'hidden'}>
-                <div className='relative'>
-                  <p className='text-red-600 font-normal text-lg'>{err}</p>
-                  <span className='absolute -top-5 -right-6 pr-3 flex items-center  cursor-pointer ins text-white' onClick={() =>setErr("")}>X</span>
+              <div className='block'>
+                <Alerts alert={alert} setAlert={setAlert} />
+                <div className={alert.res? 'mt-2 flex justify-center' : 'hidden'}>
+                    <button className='customButton ' onClick={()=>navigate('/login')}>Login</button>
                 </div>
-              </div>
-              <div className={res?'bg-slate-300 p-3 h-24 w-80 rounded-lg block':'hidden'}>                
-                  <p className='text-white text-xl  font-normal'>{res}</p>
-                  <button className='customButton mt-2' onClick={()=>navigate('/login')}>Login</button>
               </div>
             </div>
             <div className='flex justify-center items-center '>
