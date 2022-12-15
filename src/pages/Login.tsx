@@ -43,7 +43,7 @@ const Login = () => {
     if(Object.entries(formErrors).length === 0 && isSubmit){
         try {
           const response = await login(formData)
-          setUser(response.data)          
+          setUser(response.data)
           navigate('/')          
         } catch (error:any) {
           setErr(error.response.data.message)
@@ -59,7 +59,7 @@ const Login = () => {
         <div className=' flex w-full justify-center  items-center '> 
         <div className='block  bg-slate-50 h-3/4 w-3/4'> 
         <div className='flex mt-4 justify-center'>
-            <div className={err?'bg-slate-300 p-6 h-20 w-80 rounded-lg block':'hidden'}>
+            <div className={err?'bg-red-300 p-6 h-20 w-80 rounded-lg block':'hidden'}>
                 <div className='relative'>
                   <p className='text-red-600 font-normal text-lg'>{err}</p>
                   <span className='absolute -top-5 -right-6 pr-3 flex items-center  cursor-pointer ins text-white' onClick={() =>setErr("")}>X</span>

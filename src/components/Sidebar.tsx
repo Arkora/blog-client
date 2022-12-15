@@ -3,13 +3,14 @@ import {AiFillHome,AiFillSetting} from 'react-icons/ai'
 import {BsFileEarmarkPostFill} from 'react-icons/bs'
 import {RiAccountCircleFill} from 'react-icons/ri'
 import { Link} from 'react-router-dom'
-
+import { getUser } from '../localStorage'
 const Sidebar = () => {
+  const user = getUser()
   return (
     <div className='block fixed pl-12 h-screen'>
         
         <div className='mt-[6rem]'>
-          <ul>
+          <ul className='list-none'>
             <li  className='mt-6'>
              <Link to='/'> <div className='sidebar-item'>
                 <AiFillHome size={30} />
@@ -18,7 +19,7 @@ const Sidebar = () => {
 
             </li>
             <li  className='mt-6'>
-             <Link to='/profile'> <div className='sidebar-item'>
+             <Link to={`/profile/${user.id}`}> <div className='sidebar-item'>
                 <RiAccountCircleFill size={30} />
                 <h3 className='text-xl ml-2 text-center'> Profile</h3>
               </div></Link>

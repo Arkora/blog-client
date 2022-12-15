@@ -15,6 +15,19 @@
   hover:bg-slate-400
   hover:text-white;
 }
+.post-options{
+  @apply
+  w-6 
+  h-6 
+  rounded-full
+  bg-slate-300 
+  flex 
+  items-center 
+  justify-center 
+  cursor-pointer 
+  hover:bg-slate-400
+  hover:text-white;
+}
 
 .input{
   @apply block
@@ -48,6 +61,18 @@
   ease-in-out
   m-0
   focus:text-gray-700 focus:bg-white focus:border-red-300 focus:outline-none;
+}
+
+.post-actions{
+  @apply
+  bg-slate-500
+   w-8
+   h-6 
+   flex 
+   rounded-md
+ hover:bg-slate-700 
+ justify-center 
+ items-center
 }
 
 .customButton{
@@ -125,5 +150,27 @@
   h6{
     @apply text-xl;
   }  
+
+  ol{
+    @apply list-decimal
+  }
+
+  ul{
+    @apply list-disc
+  }
 }
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }  
+}
+
+
 
