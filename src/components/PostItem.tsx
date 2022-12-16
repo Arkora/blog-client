@@ -30,12 +30,13 @@ const PostItem = ({post}:any) => {
                 <div className='flex justify-end mr-2'>
                     <RiTimeFill size={20} />
                     <p className='-mt-[3px] '>{moment(post.createdAt).fromNow()}</p>
-                    <div className={isUser?'post-options ml-2' :'hidden'} onClick={()=>setExpand(!expand)}><BsThreeDotsVertical /></div>
+                    <div className={isUser?'post-options ml-2' :'hidden'} onClick={()=>setExpand(!expand)}>
+                        <BsThreeDotsVertical />
+                    </div>
                 </div>
-                <div className={expand?'w-24 h-15 bg-stone-800 block rounded-lg':'hidden'}>
+                <div className={expand?'w-16 h-12 bg-stone-800 block rounded-lg':'hidden'}>
                     <div className='flex justify-center items-center text-white p-3 '>
                        <Link to={`/edit/post/${post.id}`}><div className='post-actions '><BsFillPencilFill size={20} /></div></Link> 
-                        <div className='ml-3 post-actions '><BsFillTrashFill size={20} /></div>
                     </div>
                 </div>
             </div>

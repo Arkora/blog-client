@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Editor from "../components/Editor";
 import { getUser } from "../localStorage";
 import { getPostById,deletePost,updatePost } from "../api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Alerts from "../components/Alerts";
 
 const EditPost = () => {
@@ -13,10 +13,12 @@ const EditPost = () => {
     body: string;    
   }
   const params = useParams()
+  const navigate = useNavigate()
   const user = getUser()
   const [data, setData] = useState<string>("")
   const [fetchedData, setFetchedData] = useState<any>({})
   const [alert,setAlert] = useState<any>({res:'',err:''})
+  const [safeDelete,setSafeDelete] = useState<boolean>(false)
   const [isLoaded,setIsLoaded] = useState<boolean>(false)
   const titleRef = useRef<HTMLInputElement>(null!)
   const [post, setPost] = useState<postData>({
@@ -54,6 +56,7 @@ const EditPost = () => {
     try {
         const response = await updatePost(fetchedData.id,post)
         setAlert({...alert,res:response.data.message})
+        navigate(`/post/${fetchedData.id}`)
     } catch (error:any) {
         setAlert({...alert,err:error.response.data.message})
     }
@@ -63,12 +66,10 @@ const EditPost = () => {
     try {
         const response = await deletePost(fetchedData.id)
         setAlert({...alert,res:response.data.message})
-
-
+        navigate('/')
     } catch (error:any) {
         setAlert({...alert,err:error.response.data.message})
-
-    }
+      }
   }
 
   return (
@@ -97,14 +98,21 @@ const EditPost = () => {
                 <Editor setData={setData} data={data} />
               </div>
             </form>
-            <div className="mt-14 grid-cols-2 w-5/6  grid ">   
-                <div className="flex h-10">
+            <div className="mt-14 grid-cols-2 gap-1 w-5/6  grid ">   
+                <div className="flex w-full h-10">
                     <button className="customButton" onClick={handleUpdate}>Update Post</button>
-                    <button className="customButton ml-2" onClick={handleDelete}>Delete</button>
-                </div>             
-                <div>
-                    <Alerts alert={alert} setAlert={setAlert} />
-                </div>                
+                    <button className="customButton ml-2" onClick={() => setSafeDelete(true)}>Delete</button>                    
+                </div> 
+                <Alerts alert={alert} setAlert={setAlert} />
+            </div>
+            <div className={safeDelete? 'w-56 rounded-lg h-28 mt-2 block bg-slate-400' : 'hidden'}>
+              <div className="flex justify-center">
+                <div className="p-4">
+                  <p className="font-semibold ml-3 text-white text-lg">Are you sure?</p>                  
+                    <button className="customButton" onClick={handleDelete} >Yes</button>
+                    <button className="customButton ml-2" onClick={() =>setSafeDelete(false)}>No</button>                  
+                </div>
+              </div>
             </div>
           </div>
         </div>
