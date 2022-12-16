@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import moment from 'moment'
 import {RiTimeFill} from 'react-icons/ri'
-import {BsThreeDotsVertical,BsFillPencilFill,BsFillTrashFill} from 'react-icons/bs'
+import {BsThreeDotsVertical,BsFillPencilFill} from 'react-icons/bs'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 import { getUser } from '../localStorage'
@@ -17,7 +17,7 @@ const PostItem = ({post}:any) => {
         if(user.id === post.userId){
             setIsUser(true)
         }
-    })
+    },[])
     
   return (
     <div className='block pb-2 mt-4  border border-2 w-11/12 '>

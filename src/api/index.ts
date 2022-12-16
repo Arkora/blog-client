@@ -9,6 +9,7 @@ export const getPosts = (id:any) =>API.get(`/api/user/post/${id}`,{withCredentia
 export const getRandomPosts = () =>API.get('/api/user/posts',{withCredentials:true})
 export const getPostById = (id:any) => API.get(`/api/posts/${id}`,{withCredentials:true})
 export const createComment = (comment:any) =>API.post('api/comments/create',comment,{withCredentials:true})
-export const deleteComment = (id:any) => API.delete(`api/comments/delete/${id}`,{withCredentials:true})
+export const deleteComment = (id:number) => API.delete(`api/comments/delete/${id}`,{withCredentials:true})
 export const deletePost = (id:any) => API.delete(`api/posts/delete/${id}`,{withCredentials:true})
 export const updatePost = (id:number,post:any) => API.patch(`api/posts/update/${id}`,post,{withCredentials:true})
+export const deleteUser = (id:number) => API.delete(`api/user/delete/${id}`,{withCredentials:true})
