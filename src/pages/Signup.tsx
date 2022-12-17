@@ -72,8 +72,7 @@ const Signup = () => {
          try {
           const {data} = await signup(formData)          
           setAlert({...alert,res:data.message})  
-         } catch (error:any) {
-          setAlert({...alert,res:''})
+         } catch (error:any) {          
           setAlert({...alert,err:error.response.data.message})          
          }  
         }

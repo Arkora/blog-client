@@ -13,17 +13,15 @@ const CommentsList = ({comments,postId}:Props) => {
     const user = getUser()
     const [show, setShow] = useState(false)
     const [comment,setComment] = useState<any>({body:'',postId:postId,userId:user.id})
-    const inputRef = useRef<HTMLInputElement>(null!)
+    const inputRef = useRef<HTMLInputElement>(null!)   
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) =>{
          e.preventDefault()
         try {
           const response = await createComment(comment)
-          inputRef.current.value = ''
-          console.log(response.data)
+          inputRef.current.value = ''          
     
-        } catch (error:any) {
-          console.log(error.response.data)
+        } catch (error:any) {          
         }   
         
       }
@@ -54,7 +52,7 @@ const CommentsList = ({comments,postId}:Props) => {
                         return <Comment comment={comment} />    
                     })
                     : <div></div>}
-        </div>
+        </div>        
     </div>
   )
 }

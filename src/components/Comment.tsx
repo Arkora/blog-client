@@ -13,9 +13,9 @@ const Comment = ({comment}:any) => {
     const handleDelete = async (id:any) => {
         try {
             const response = await deleteComment(id)
-            console.log(response.data)
+            
         } catch (error:any) {
-            console.log(error.response.data)            
+                     
         }
     }
     useEffect(() => {

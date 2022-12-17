@@ -23,6 +23,7 @@ const Post = () => {
   const user = getUser();
   const [isUser, setIsUser] = useState(false);
   const [expand, setExpand] = useState(false);
+  
 
   useEffect(() => {
     if (user.id === post.userId) {

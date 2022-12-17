@@ -6,7 +6,7 @@ import { BsFillPencilFill } from 'react-icons/bs'
 import moment from 'moment'
 import SettingsEdit from '../components/SettingsEdit'
 import { useNavigate } from 'react-router-dom'
-import { deleteUser } from '../api'
+import { deleteUser,updatePassword } from '../api'
 import Alerts from '../components/Alerts'
 
 const Settings = () => {
@@ -15,13 +15,37 @@ const Settings = () => {
     const [edit, setEdit] = useState<boolean>(false)
     const [toggle,setToggle] = useState<boolean>(false)
     const [toggleDelete,setToggleDelete] = useState<boolean>(false)
-    const [formData,setFormData] = useState<any>({password:'',newPassword:''})
+    const [formData,setFormData] = useState<any>({userId:user.id,password:'',newPassword:''})
     const [alert, setAlert] = useState<any>({res:'',err:''})
     const [isDeleted, setIsDeleted] = useState(false)
     const passwordRef = useRef<HTMLInputElement>(null!)
     const divRef = useRef<HTMLDivElement>(null!)
     const passwordDivRef = useRef<HTMLDivElement>(null!)
     const alertDivRef = useRef<HTMLDivElement>(null!)
+    const [isSubmit,setIsSubmit] = useState<boolean>(false)
+    const [formErrors, setFormErrors] = useState<string|any>({})
+    
+
+
+    
+    const validate = (values:string|any) =>{
+        const errors:string|any = {};
+        if (!values.password) {
+            errors.password = "Password is required!";
+          } else if (values.password.length < 8) {
+            errors.password = "Password must be more than 8 characters!";
+          } else if (values.password.length > 20) {
+            errors.password = "Password cannot exceed more than 20 characters!";
+          }
+        if (!values.newPassword) {
+            errors.newPassword = "Password is required!";
+          } else if (values.newPassword.length < 8) {
+            errors.newPassword = "Password must be more than 8 characters!";
+          } else if (values.newPassword.length > 20) {
+            errors.newPassword = "Password cannot exceed more than 20 characters!";
+          }
+          return errors; 
+    }
 
 
     useEffect(() =>{
@@ -66,10 +90,18 @@ const Settings = () => {
         }
     }
    
-    const handleSubmit =  (e:any) =>{
+    const handleSubmit =  async(e:any) =>{        
         e.preventDefault()
-        console.log(formData)
-        //TODO when endpoint is ready!!!
+        setIsSubmit(true)
+        setFormErrors(validate(formData))   
+        if(Object.entries(formErrors).length === 0 && isSubmit){
+         try {
+          const {data} = await updatePassword(formData)          
+          setAlert({...alert,res:data.message}) 
+         } catch (error:any) {          
+          setAlert({...alert,err:error.response.data.message})          
+         }  
+        }        
     }
    
   return (
@@ -82,13 +114,11 @@ const Settings = () => {
             <div className='lg:w-80  sm:w-20 md:w-40'>
                 <Sidebar />
             </div>
-            <div ref={alertDivRef} className={
+            <div  className={
                 alert.res || alert.err?'flex-auto w-11/12 rounded-lg bg-yellow-100  h-[110vh] p-2 m-4'
                 :'flex-auto w-11/12 rounded-lg bg-yellow-100  h-screen p-2 m-4'
                 }>   
-                <div  className='flex justify-center'>
-                    <Alerts alert={alert} setAlert={setAlert} />
-                </div>             
+                           
                 <div className='flex justify-center h-screen items-center'>
                     <div className='w-11/12 h-[36rem] flex justify-center items-center bg-slate-50'>
                         <div className=' no-scrollbar overflow-y-auto w-[80%] h-[90%] p-2 '>
@@ -132,12 +162,14 @@ const Settings = () => {
                                             <div>
                                                 <input ref={passwordRef}  type="password" className='input' onChange={(e) =>setFormData({...formData,password:e.target.value})} placeholder=''/>
                                             </div>
+                                                <p className='text-red-400 ml-2'>{formErrors.password}</p>
                                         </div>                                         
                                         <div  className=' flex mt-4 '>
                                             <p  className='w-[20%]'>New Password</p>
                                             <div>
                                                 <input type="password" className='input' onChange={(e) =>setFormData({...formData,newPassword:e.target.value})}  placeholder=''/>
                                             </div>
+                                                <p className='text-red-400 ml-2'>{formErrors.newPassword}</p>
                                         </div>                                         
                                     </form>
                                     <div className='mt-2'>
@@ -158,6 +190,10 @@ const Settings = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div ref={alertDivRef} className='flex mt-4 '>
+                                    <Alerts alert={alert} setAlert={setAlert} />
+                                </div>  
 
                             </div>
                         </div>

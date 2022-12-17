@@ -43,8 +43,7 @@ const SettingsEdit = ({user,setEdit}:Props) => {
           const response = await getUserById(user.id)
           setUser(response.data)
 
-         } catch (error:any) {
-          setAlert({...alert,res:''})
+         } catch (error:any) {          
           setAlert({...alert,err:error.response.data.message})          
          }  
         }        
