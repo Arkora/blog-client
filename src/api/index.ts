@@ -13,3 +13,5 @@ export const deleteComment = (id:number) => API.delete(`api/comments/delete/${id
 export const deletePost = (id:any) => API.delete(`api/posts/delete/${id}`,{withCredentials:true})
 export const updatePost = (id:number,post:any) => API.patch(`api/posts/update/${id}`,post,{withCredentials:true})
 export const deleteUser = (id:number) => API.delete(`api/user/delete/${id}`,{withCredentials:true})
+export const updateUser = (id:number,user:any) => API.patch(`api/user/update/${id}`,user,{withCredentials:true})
+export const getUserById = (id:any) =>API.get(`api/user/${id}`,{withCredentials:true})

@@ -18,9 +18,7 @@ const Signup = () => {
     const [password,setPassword] = useState<string>('')
     const [passwordComp,setPasswordComp] = useState(true)
     const [isSubmit, setIsSubmit] = useState<boolean>(false)
-    const [alert,setAlert] = useState<any>({res:'',err:''})
-    const [err, setErr] = useState<string>("")
-    const [res,setRes] = useState<string>("Account created Successfully")
+    const [alert,setAlert] = useState<any>({res:'',err:''})    
     
 
     const navigate = useNavigate()
@@ -64,9 +62,7 @@ const Signup = () => {
       return errors;   
     };
 
-    useEffect(()=>{
-      setRes("")      
-    },[])
+    
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
@@ -79,14 +75,7 @@ const Signup = () => {
          } catch (error:any) {
           setAlert({...alert,res:''})
           setAlert({...alert,err:error.response.data.message})          
-         }
-        
-         const timer = setTimeout(()=>{                       
-            setErr("")            
-            clearTimeout(timer)
-         },5000)
-
-         
+         }  
         }
       }
   return (
@@ -111,7 +100,7 @@ const Signup = () => {
                 <h3 className='mt-2 text-2xl font-thin'>And Share your ideas</h3>
               </div>
             <div className='p-36 block'>
-              <form onSubmit={handleSubmit} >
+              <form >
                 <div className='flex '>
                     <div>
                         <input type="text" placeholder='Name' className='input' onChange={(e)=> setFormData({...formData,firstname:e.target.value})} />

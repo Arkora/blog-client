@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 interface Props {
   alert: any;
@@ -6,6 +6,17 @@ interface Props {
 }
 
 const Alerts = ({ alert, setAlert }: Props) => {
+  useEffect(()=>{
+    if(alert.res){
+      setAlert({...alert,err:''})
+    }
+  },[alert.res])
+
+  useEffect(()=>{
+   if(alert.err){
+      setAlert({...alert,res:''})
+    }
+  },[alert.err])
   return (
     
     <>
