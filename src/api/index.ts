@@ -16,3 +16,5 @@ export const deleteUser = (id:number) => API.delete(`api/user/delete/${id}`,{wit
 export const updateUser = (id:number,user:any) => API.patch(`api/user/update/${id}`,user,{withCredentials:true})
 export const getUserById = (id:any) =>API.get(`api/user/${id}`,{withCredentials:true})
 export const updatePassword = (passwrodRequest:any) => API.post('api/user/update/password',passwrodRequest,{withCredentials:true})
+export const getNotifications = (id:any) =>API.get(`api/notification/${id}`,{withCredentials:true})
+export const deleteNotification = (id:any) =>API.delete(`api/notification/delete/${id}`,{withCredentials:true})

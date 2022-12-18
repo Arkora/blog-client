@@ -1,13 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {AiFillHome} from 'react-icons/ai'
 import {IoMdNotifications} from 'react-icons/io'
 import {FaPowerOff} from 'react-icons/fa'
 import {Link,useNavigate} from 'react-router-dom'
 import { getUser } from '../localStorage'
+import { getNotifications } from '../api'
+import Notification from './Notification'
 
 const Topbar = () => {
     const [logoutToggle, setLogoutToggle] = useState(false)
-    const [notificationsToggle, setNotificationsToggle] = useState(false)
+    const [notificationsToggle, setNotificationsToggle] = useState(false)    
+    const [notifications,setNotifications] = useState([])
     const user = getUser()
     const navigate = useNavigate()
 
@@ -26,6 +29,19 @@ const Topbar = () => {
         sessionStorage.clear()        
         navigate('/login')
     }
+
+    const fetchNotifications =async () => {
+        try {
+            const {data} = await getNotifications(user.id)
+            setNotifications(data)
+        } catch (error:any) {
+            console.log(error.response.data.message)
+        }
+    }
+
+    useEffect(()=>{
+        fetchNotifications()        
+    },[])
     
   return (
     <div className='fixed bg-white  w-full p-4'>
@@ -67,12 +83,11 @@ const Topbar = () => {
             </div>
         </div>
         <div className={notificationsToggle? 'absolute rounded-md right-1 w-96 h-[28rem] bg-slate-400 overflow-auto flex p-4 pt-4 leading-5' : 'hidden'}>
-            <div className='block w-full  '>
-                <h1 className='text-center text-4xl'>Notifications</h1>                
-                <div className='p-2 mt-2 cursor-pointer relative hover:bg-slate-600 w-full bg-slate-500 rounded-xl'>
-                    <h6 className='text-xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
-                    <span className='absolute  inset-y-[0.4rem] right-0 pr-3'><button className='notification-button  '>X</button></span>
-                </div>        
+            <div className='block w-full no-scrollbar overflow-y-auto '>
+                <h1 className='text-center text-4xl'>Notifications</h1>
+                {notifications.length? notifications.map((notification)=>{
+                    return <Notification notification={notification}/>
+                }):<div></div>}                
             </div>
         </div>
     </div>

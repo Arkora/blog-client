@@ -33,7 +33,7 @@ const Post = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await getPostById(params.id);
+      const response = await getPostById(Number(params.id));
       setPost(response.data);
       setIsLoaded(true);
     } catch (error: any) {
