@@ -49,7 +49,7 @@ const Topbar = () => {
             <div className='grid h-full grid-flow-col grid-cols-3 gap-2'>
                 <div className='flex justify-center'>
                     <div className='flex'>
-                        <div className='w-14 h-14 rounded-full bg-slate-400 flex justify-center items-center'>Hello</div>
+                        <div className='w-14 h-14 rounded-full bg-neutral-900 text-white flex justify-center items-center'>Hello</div>
                         <h3 className='text-xl p-3'>{user.firstname + ' ' + user.lastname}</h3>
                     </div>
                 </div>
@@ -63,8 +63,13 @@ const Topbar = () => {
                         <Link to='/'><div className='icons-top '>
                             <AiFillHome size={20}  />
                         </div></Link>
-                        <div className='icons-top' onClick={handleNotifications}>
-                            <IoMdNotifications size={20} />
+                        <div className='flex'>
+                            <div className='icons-top' onClick={handleNotifications}>
+                                <IoMdNotifications size={20} />
+                            </div>
+                            <div className='w-4 h-4 bg-red-600 text-white rounded-full justify-center items-center flex -ml-4'>
+                                <p>{notifications.length}</p>
+                            </div>
                         </div>
                         <div className='icons-top' onClick={handleLogout}>
                             <FaPowerOff size={20} />
@@ -73,7 +78,7 @@ const Topbar = () => {
                 </div>            
             </div>
         </div>
-        <div className={logoutToggle? 'absolute right-1 w-72 h-40 rounded-md bg-slate-400 flex justify-center items-center leading-5' : 'hidden'}>
+        <div className={logoutToggle? 'absolute right-1 w-72 h-40 rounded-md bg-gray-800 text-white flex justify-center items-center leading-5' : 'hidden'}>
             <div className='block'>
                 <h6 className='text-center'>Are you sure?</h6>
                 <div className='mt-2' >
@@ -82,7 +87,7 @@ const Topbar = () => {
                 </div>
             </div>
         </div>
-        <div className={notificationsToggle? 'absolute rounded-md right-1 w-96 h-[28rem] bg-slate-400 overflow-auto flex p-4 pt-4 leading-5' : 'hidden'}>
+        <div className={notificationsToggle? 'absolute rounded-md right-1 w-96 h-[28rem] bg-gray-800 overflow-auto text-white flex p-4 pt-4 leading-5' : 'hidden'}>
             <div className='block w-full no-scrollbar overflow-y-auto '>
                 <h1 className='text-center text-4xl'>Notifications</h1>
                 {notifications.length? notifications.map((notification)=>{

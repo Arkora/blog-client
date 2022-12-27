@@ -10,7 +10,6 @@ const Notification = ({notification}:any) => {
             console.log(error.response.data.message)
         }
     }
-    console.log(notification)
   return (
     <div className='p-2 mt-2 cursor-pointer relative hover:bg-slate-600 w-full bg-slate-500 rounded-xl'>
        <Link to={`/post/${notification.postId}`}> <div className='w-[80%]'>

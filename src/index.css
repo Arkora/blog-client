@@ -2,17 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+  @apply
+  bg-gray-800
+}
+
 .icons-top{
   @apply
   w-10 
   h-10 
   rounded-full
-  bg-slate-300 
+  bg-zinc-800
   flex 
+  text-white
   items-center 
   justify-center 
   cursor-pointer 
-  hover:bg-slate-400
+  hover:bg-zinc-700
   hover:text-white;
 }
 .post-options{
@@ -20,12 +26,12 @@
   w-6 
   h-6 
   rounded-full
-  bg-slate-300 
+  bg-zinc-800
   flex 
   items-center 
   justify-center 
   cursor-pointer 
-  hover:bg-slate-400
+  hover:bg-zinc-900
   hover:text-white;
 }
 
@@ -146,7 +152,8 @@
   hover:py-1  
   hover:px-6 
   cursor-pointer 
-  hover:bg-slate-100;
+  text-slate-50
+  hover:bg-zinc-900;
 }
 
 

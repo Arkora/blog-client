@@ -27,8 +27,8 @@ const Comment = ({comment}:any) => {
   return (
     <div className='p-2 block  mt-2'>
          <div className="flex  p-2 " onMouseEnter={() => setShow(true)} onMouseLeave={() =>setShow(false)}>
-            <div className="h-10 w-10 bg-stone-600 rounded-full flex text-white font-semibold justify-center items-center">{comment.firstname.substring(0, 1) + comment.lastname.substring(0, 1)}</div>
-            <div className='block ml-2 p-1 rounded-md bg-slate-200'>
+            <div className="h-10 w-10 bg-neutral-900 rounded-full flex text-white font-semibold justify-center items-center">{comment.firstname.substring(0, 1) + comment.lastname.substring(0, 1)}</div>
+            <div className='block ml-2 p-2 max-w-prose rounded-md bg-gray-800'>
                 <Link to={`/profile/${comment.userId}`}> <h6 className="ml-2 underline">{comment.firstname + " " + comment.lastname}</h6> </Link>
                 <p>{comment.body}</p>
             </div>

@@ -52,7 +52,7 @@ const Newpost = () => {
         <div className="lg:w-80  sm:w-20 md:w-40">
           <Sidebar />
         </div>
-        <div className="flex-auto h-screen w-5/6">
+        <div className="flex-auto h-screen pl-12 bg-white w-5/6">
           <div className="h-screen  mt-10">
             <form action="submit">
               <div className="w-3/4">
@@ -64,8 +64,8 @@ const Newpost = () => {
                   onChange={(e) => setPost({ ...post, title: e.target.value })}
                 />
               </div>
-              <div className="w-3/4 ">
-                <Editor setData={setData} data={data} />
+              <div className="w-3/4  ">
+                <Editor  setData={setData} data={data} />
               </div>
             </form>
             <div className="mt-20 flex ">

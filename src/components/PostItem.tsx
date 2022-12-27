@@ -20,10 +20,10 @@ const PostItem = ({post}:any) => {
     },[])
     
   return (
-    <div className='block pb-2 mt-4  border border-2 w-11/12 '>
-        <div className='grid grid-cols-2  mt-4'>           
+    <div className='block pb-2 my-20  bg-neutral-600 p-1 rounded-md text-slate-50   w-11/12 '>
+        <div className='grid grid-cols-2   mt-4'>           
             <div className="flex  p-2 ">
-                  <div className="h-10 w-10 bg-stone-600 rounded-full flex text-white font-semibold justify-center items-center">{post.firstname.substring(0, 1) + post.lastname.substring(0, 1)}</div>
+                  <div className="h-10 w-10 bg-zinc-800 rounded-full flex text-white font-semibold justify-center items-center">{post.firstname.substring(0, 1) + post.lastname.substring(0, 1)}</div>
                  <Link to={`/profile/${post.userId}`}> <h5 className="ml-2 underline">{post.firstname + " " + post.lastname}</h5> </Link>
             </div>
             <div className='flex justify-end'>
@@ -42,7 +42,7 @@ const PostItem = ({post}:any) => {
             </div>
         </div>
         <br />
-        <hr />
+        {/* <hr /> */}
         <div className='p-2'>
            <Link to={`/post/${post.id}`}> <h4>{post.title}</h4></Link>
         </div>

@@ -14,8 +14,8 @@ const Editor = ({setData,data}:Props) => {
      
    
   return (
-    <div className=' mt-2 overflow'>
-       <ReactQuill theme="snow" value={data} onChange={setData} className='h-80' /> 
+    <div className=' mt-2  overflow'>
+       <ReactQuill theme='snow' value={data} onChange={setData} className='h-80' /> 
     </div>
   )
 }

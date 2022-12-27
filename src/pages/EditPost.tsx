@@ -79,13 +79,13 @@ const EditPost = () => {
       </div>
       <hr />
       <div className="h-screen flex-row flex mt-4">
-        <div className="lg:w-80  sm:w-20 md:w-40">
+        <div className="w-80">
           <Sidebar />
         </div>
-        <div className="flex-auto h-screen w-5/6">
+        <div className="flex-auto h-screen pl-12 bg-white w-5/6">
           <div className="h-screen  mt-10">
             <form action="submit">
-              <div className="w-3/4">
+              <div className="w-3/4 ">
                 <input
                   ref={titleRef}
                   type="text"
@@ -94,7 +94,7 @@ const EditPost = () => {
                   onChange={(e) => setPost({ ...post, title: e.target.value })}
                 />
               </div>
-              <div className="w-3/4 ">
+              <div className="w-3/4  ">
                 <Editor setData={setData} data={data} />
               </div>
             </form>
