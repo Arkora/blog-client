@@ -29,7 +29,6 @@ const CommentsList = ({comments,postId}:Props) => {
 
       useEffect(()=>{
         if(show){
-          // commentsSectionRef.current.scrollIntoView({behavior:'smooth'})
           commentsSectionRef.current.scrollIntoView({behavior:"smooth"})
         }
       },[show])
@@ -57,7 +56,7 @@ const CommentsList = ({comments,postId}:Props) => {
 
         <div ref={commentsSectionRef} className={show?'ml-2' :'hidden'}>
             {comments.length? comments.map((comment:any)=>{
-                        return <Comment comment={comment} />    
+                        return <div> <Comment comment={comment} /> </div>
                     })
                     : <div></div>}
         </div>        

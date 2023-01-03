@@ -53,7 +53,7 @@ const Login = () => {
     }
   }
   return (
-    <div>
+    <div className='bg-white'>
       <div className='flex justify-center items-center '>
           <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
         </div>

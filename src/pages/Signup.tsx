@@ -78,7 +78,7 @@ const Signup = () => {
         }
       }
   return (
-    <div className='block'>
+    <div className='block bg-slate-50'>
         <div className='flex justify-center items-center pt-4'>
         <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
         </div>

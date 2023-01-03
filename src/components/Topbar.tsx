@@ -44,7 +44,7 @@ const Topbar = () => {
     },[])
     
   return (
-    <div className='fixed bg-white  w-full p-4'>
+    <div className='fixed bg-white shadow-md shadow-zinc-900  w-full p-4'>
         <div className='relative'>
             <div className='grid h-full grid-flow-col grid-cols-3 gap-2'>
                 <div className='flex justify-center'>
