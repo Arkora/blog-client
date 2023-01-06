@@ -59,7 +59,7 @@ const Post = () => {
           <div className="block h-screen mt-4 w-11/12 ">
             <Alerts alert={alert} setAlert={setAlert} />
             {isLoaded ? (
-              <div className="block border border-2 rounded-md text-slate-50 bg-neutral-600 p-2  pb-8 ">
+              <div className="block border border-2 rounded-md text-slate-50 bg-neutral-600 p-2 my-10 pb-8 ">
                 <div className='grid grid-cols-2  mt-4'>           
             <div className="flex  p-2 ">
                   <div className="h-10 w-10 bg-zinc-800 rounded-full flex text-white font-semibold justify-center items-center">{post.firstname.substring(0, 1) + post.lastname.substring(0, 1)}</div>
