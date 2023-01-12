@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -8,9 +7,11 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Post from './pages/Post';
 import EditPost from './pages/EditPost';
+import Page404 from './pages/Page404';
 
 
-const App = () => {
+const App = () => {  
+
   return (
     <Router>
       <Routes>
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/settings' element={<Settings />} />
         <Route path='/post/:id' element={<Post />} />
         <Route path='/edit/post/:id'element={<EditPost />} />
+        <Route path='*' element={<Page404/>} />
       </Routes>
     </Router>
   )

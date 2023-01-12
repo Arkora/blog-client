@@ -12,7 +12,7 @@ const Comment = ({comment}:any) => {
 
     const handleDelete = async (id:any) => {
         try {
-            const response = await deleteComment(id)
+             await deleteComment(id)
             
         } catch (error:any) {
                      
