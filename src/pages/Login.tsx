@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import { Link,useNavigate } from 'react-router-dom'
 import { login } from '../api'
-import { setUser } from '../localStorage'
+import { setUser,getUser } from '../localStorage'
 import Alerts from '../components/Alerts'
 const Login = () => {
   interface FormData{
@@ -16,6 +16,7 @@ const Login = () => {
   const [formErrors, setFormErrors] = useState<any|string>({})
   const [isSubmit, setIsSubmit] = useState(false)
   const [alert,setAlert] = useState<any>({res:'',err:''})
+  const user = getUser()
 
   
 
@@ -52,8 +53,15 @@ const Login = () => {
         }
     }
   }
+
+  useEffect(() => {
+    if(user){
+      navigate("/")
+    }
+  }, [user])
+  
   return (
-    <div>
+    <div className='bg-white'>
       <div className='flex justify-center items-center '>
           <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
         </div>
@@ -81,6 +89,10 @@ const Login = () => {
                     </div>
                     <p className='text-red-400'>{formErrors.password}</p>
                   </div>
+                  <div className='flex justify-center gap-3'>
+                  <p>Create account now!</p>
+                  <Link className='text-blue-700 underline' to={'/signup'}>Sign up</Link>
+                </div>
                   <button className='customButton mt-6 '> Login</button>
                 </form>              
               </div>

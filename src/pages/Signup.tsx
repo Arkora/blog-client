@@ -3,6 +3,7 @@ import { AiFillEye,AiFillEyeInvisible } from 'react-icons/ai'
 import { Link,useNavigate} from 'react-router-dom'
 import { signup } from '../api'
 import Alerts from '../components/Alerts'
+import { getUser } from '../localStorage'
 
 const Signup = () => {
     interface SignupData{
@@ -12,6 +13,7 @@ const Signup = () => {
         password:string;
         username:string;
     }
+    const user = getUser()
     const [showPassword, setShowPassword] = useState(false)
     const [formData,setFormData] = useState<SignupData>({firstname:'',lastname:'',email:'',password:"",username:''})
     const [formErrors, setFormErrors] = useState<string|any>({})    
@@ -77,8 +79,16 @@ const Signup = () => {
          }  
         }
       }
+
+      
+  useEffect(() => {
+    if(user){
+      navigate("/")
+    }
+  }, [user])
+
   return (
-    <div className='block'>
+    <div className='block bg-slate-50'>
         <div className='flex justify-center items-center pt-4'>
         <Link to='/'><h1 className='text-7xl font-thin'>Instablog</h1></Link>
         </div>
@@ -133,6 +143,10 @@ const Signup = () => {
                       </div>
                     </div>
                 </div> 
+                <div className='flex justify-center gap-3'>
+                  <p>Have account already?</p>
+                  <Link className='text-blue-700 underline' to={'/login'}>Login</Link>
+                </div>
                 <div className='mt-8 flex justify-center items-center'>
                     <button className='customButton ' onClick={()=>handleSubmit}>Create Account</button>
                 </div>               

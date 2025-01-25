@@ -36,7 +36,7 @@ const Profile = () => {
                     <Alerts alert={alert} setAlert={setAlert}/>
                 </div>
                 {postsRes.length? postsRes.map((post)=>{
-                    return  <PostItem post={post} />
+                    return  <PostItem key={post} post={post} />
                 })
                  : <div></div>}
             </div>
